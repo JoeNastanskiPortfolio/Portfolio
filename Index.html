@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joe Nastanski — Product Leader & AI Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #0a0e1a;
+    --navy-mid:   #111827;
+    --navy-card:  #151d2e;
+    --navy-bio:   #0f1628;
+    --blue-royal: #1a4fd6;
+    --blue-bright:#4d9fff;
+    --blue-glow:  #6db8ff;
+    --star:       #c8e0ff;
+    --white:      #f0f4ff;
+    --gold:       #f0c040;
+    --text-body:  #9ab0cc;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── STARFIELD ── */
+  #starfield {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── LAYOUT ── */
+  .page { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 48px;
+    text-align: center;
+  }
+
+  .hero-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.8rem, 7vw, 3.6rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, #ffffff 0%, var(--blue-bright) 60%, var(--blue-royal) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.65rem, 2.2vw, 0.9rem);
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--blue-glow);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .hero-tagline {
+    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+    color: var(--text-body);
+    max-width: 420px;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-royal), transparent);
+  }
+  .divider-star {
+    font-size: 16px;
+    color: var(--blue-bright);
+    animation: spin 8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── BIO SECTION ── */
+  .bio-section {
+    padding: 56px 24px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--white);
+  }
+
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .bio-card {
+    background: var(--navy-card);
+    border: 1px solid rgba(77,159,255,0.14);
+    border-radius: 14px;
+    padding: 24px 26px;
+  }
+
+  .bio-card.wide {
+    grid-column: 1 / -1;
+  }
+
+  .bio-card-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 10px;
+  }
+
+  .bio-card p {
+    font-size: 0.95rem;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+
+  .bio-card p strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .credential-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .credential-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-body);
+    line-height: 1.5;
+  }
+
+  .cred-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .skill-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .chip {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    padding: 4px 11px;
+    border-radius: 20px;
+    background: rgba(77,159,255,0.1);
+    border: 1px solid rgba(77,159,255,0.22);
+    color: var(--blue-glow);
+  }
+
+  /* ── GAMES SECTION ── */
+  .games-section {
+    padding: 16px 24px 80px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── GAME GRID ── */
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  /* ── GAME CARD ── */
+  .game-card {
+    background: var(--navy-card);
+    border: 1px solid rgba(77,159,255,0.18);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+  }
+  .game-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(77,159,255,0.6);
+    box-shadow: 0 16px 48px rgba(26,79,214,0.35), 0 0 0 1px rgba(77,159,255,0.2);
+  }
+
+  .card-preview {
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    background: linear-gradient(135deg, #0d1f3c 0%, #162848 50%, #0d2240 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .felt-preview {
+    background: linear-gradient(135deg, #0d3320 0%, #145228 50%, #0d3320 100%);
+  }
+  .felt-preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px,
+      transparent 1px, transparent 8px
+    );
+  }
+
+  .dice-preview {
+    display: flex;
+    gap: 8px;
+    z-index: 1;
+    position: relative;
+  }
+  .mini-die {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #f8f8f0 0%, #d8d8cc 100%);
+    border-radius: 9px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 5px;
+    gap: 3px;
+    box-shadow: 2px 3px 8px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.8);
+  }
+  .pip {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #1a1a1a;
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+  }
+  .pip.hidden { visibility: hidden; }
+
+  .card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--gold);
+    color: #1a1000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+
+  .card-body {
+    padding: 20px 22px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--white);
+  }
+
+  .card-desc {
+    font-size: 0.875rem;
+    color: var(--text-body);
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(77,159,255,0.1);
+    border: 1px solid rgba(77,159,255,0.25);
+    color: var(--blue-glow);
+    text-transform: uppercase;
+  }
+
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, var(--blue-royal), #1060e8);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.04em;
+    align-self: flex-start;
+    transition: filter 0.2s;
+  }
+  .game-card:hover .card-cta { filter: brightness(1.2); }
+
+  .thumb-preview { padding: 0; overflow: hidden; }
+  .thumb-img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+  /* ── COMING SOON ── */
+  /* ── COMING SOON ── */
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .coming-soon .card-cta {
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(77,159,255,0.1);
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: rgba(154,176,204,0.45);
+    letter-spacing: 0.06em;
+  }
+  footer span { color: var(--blue-bright); opacity: 0.7; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .bio-grid { grid-template-columns: 1fr; }
+    .bio-card.wide { grid-column: 1; }
+    .hero { padding: 44px 20px 36px; }
+    .card-preview { height: 148px; }
+    .mini-die { width: 36px; height: 36px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-wrap, .divider-star { animation: none; }
+    .game-card { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1 class="hero-name">JOE NASTANSKI</h1>
+    <p class="hero-tagline">Imagination &nbsp;|&nbsp; Innovation &nbsp;|&nbsp; Impact</p>
+  </header>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-star">✦</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- BIO -->
+  <section class="bio-section">
+    <p class="section-label">About</p>
+    <h2 class="section-title">Product Leader. AI Builder.</h2>
+
+    <div class="bio-grid">
+
+      <div class="bio-card wide">
+        <div class="bio-card-label">What I Do</div>
+        <p>I build the systems that run enterprise sales organizations. With <strong>15+ years</strong> leading product and platform work across Salesforce Sales Cloud, CPQ, commissions, forecasting, and territory management — I take on the hard, cross-functional problems and ship them. Now I'm applying that same hands-on drive to AI, building real products with it, not just studying it.</p>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-card-label">Credentials</div>
+        <ul class="credential-list">
+          <li><span class="cred-icon">🎓</span> MBA — Babson College</li>
+          <li><span class="cred-icon">🤖</span> Graduate Certificate in AI Applications for Business — Northeastern University</li>
+          <li><span class="cred-icon">🏢</span> 15+ years in Enterprise Product &amp; Platform Leadership</li>
+        </ul>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-card-label">Expertise</div>
+        <div class="skill-chips">
+          <span class="chip">Salesforce</span>
+          <span class="chip">Sales Cloud</span>
+          <span class="chip">CPQ</span>
+          <span class="chip">Commissions</span>
+          <span class="chip">Forecasting</span>
+          <span class="chip">Territory Mgmt</span>
+          <span class="chip">Vibe Coding</span>
+          <span class="chip">AI Applications</span>
+          <span class="chip">Cross-functional</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-star">✦</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- GAMES -->
+  <main class="games-section">
+    <p class="section-label">Vibe Coding Showcase</p>
+    <h2 class="section-title">What I'm Building with AI</h2>
+
+    <div class="game-grid">
+
+      <!-- YACHT -->
+      <a class="game-card" href="https://joenastanskiportfolio.github.io/Joe-Nastanski-Yacht/" target="_blank" rel="noopener">
+        <div class="card-preview thumb-preview">
+          <img src="yacht-thumb.png" alt="Yacht game screenshot" class="thumb-img">
+          <div class="card-badge">LIVE</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Yacht</div>
+          <p class="card-desc">The classic 1938 dice game — built entirely through AI-assisted vibe coding. Roll five dice, chase 12 categories, and aim for Yacht. Casino-style green felt table.</p>
+          <div class="card-tags">
+            <span class="tag">Dice</span>
+            <span class="tag">Strategy</span>
+            <span class="tag">Vibe Coded</span>
+          </div>
+          <div class="card-cta">Play Now →</div>
+        </div>
+      </a>
+
+      <!-- COMING SOON -->
+      <div class="game-card coming-soon">
+        <div class="card-preview">
+          <span>🎮</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Coming Soon</div>
+          <p class="card-desc">The next Nastanski game is in development. Check back soon.</p>
+          <div class="card-tags">
+            <span class="tag">In Dev</span>
+          </div>
+          <div class="card-cta">Stay Tuned</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 <span>Joe Nastanski</span> &nbsp;·&nbsp; Imagination | Innovation | Impact</p>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function makeStars(n) {
+    stars = [];
+    for (let i = 0; i < n; i++) {
+      stars.push({
+        x:     Math.random() * canvas.width,
+        y:     Math.random() * canvas.height,
+        r:     Math.random() * 1.2 + 0.2,
+        op:    Math.random() * 0.45 + 0.05,
+        speed: Math.random() * 0.007 + 0.002,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      const b = s.op * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,224,255,${b})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); makeStars(120); });
+  resize();
+  makeStars(120);
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>

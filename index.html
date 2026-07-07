@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -33,7 +33,6 @@
     overflow-x: hidden;
   }
 
-  /* ── STARFIELD ── */
   #starfield {
     position: fixed;
     inset: 0;
@@ -41,10 +40,8 @@
     z-index: 0;
   }
 
-  /* ── LAYOUT ── */
   .page { position: relative; z-index: 1; }
 
-  /* ── HERO ── */
   .hero {
     display: flex;
     flex-direction: column;
@@ -85,7 +82,6 @@
     text-transform: uppercase;
   }
 
-  /* ── DIVIDER ── */
   .divider {
     width: 100%;
     max-width: 860px;
@@ -107,7 +103,6 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── BIO SECTION ── */
   .bio-section {
     padding: 56px 24px 60px;
     max-width: 860px;
@@ -209,21 +204,18 @@
     color: var(--blue-glow);
   }
 
-  /* ── GAMES SECTION ── */
   .games-section {
     padding: 16px 24px 80px;
     max-width: 860px;
     margin: 0 auto;
   }
 
-  /* ── GAME GRID ── */
   .game-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 24px;
   }
 
-  /* ── GAME CARD ── */
   .game-card {
     background: var(--navy-card);
     border: 1px solid rgba(77,159,255,0.18);
@@ -370,8 +362,7 @@
   .thumb-preview { padding: 0; overflow: hidden; }
   .thumb-img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 
-  /* ── COMING SOON ── */
-  /* ── COMING SOON ── */
+  .coming-soon {
     opacity: 0.45;
     pointer-events: none;
   }
@@ -379,7 +370,6 @@
     background: rgba(255,255,255,0.08);
   }
 
-  /* ── FOOTER ── */
   footer {
     border-top: 1px solid rgba(77,159,255,0.1);
     padding: 32px 24px;
@@ -390,7 +380,6 @@
   }
   footer span { color: var(--blue-bright); opacity: 0.7; }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 600px) {
     .bio-grid { grid-template-columns: 1fr; }
     .bio-card.wide { grid-column: 1; }
@@ -468,12 +457,30 @@
     <div class="divider-line"></div>
   </div>
 
-  <!-- GAMES -->
+  <!-- PROJECTS -->
   <main class="games-section">
     <p class="section-label">Vibe Coding Showcase</p>
     <h2 class="section-title">What I'm Building with AI</h2>
 
     <div class="game-grid">
+
+      <!-- DEAL DESK TRIAGE AGENT -->
+      <a class="game-card" href="https://deal-desk-triage-agent.vercel.app/" target="_blank" rel="noopener">
+        <div class="card-preview">
+          <span>🤖</span>
+          <div class="card-badge">LIVE</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Deal Desk Agent</div>
+          <p class="card-desc">A live AI agent that triages sales-exec deal questions — discount approvals, payment terms, contract redlines — and decides auto-resolve vs. escalate. Scores itself against a labeled eval set with per-category analytics.</p>
+          <div class="card-tags">
+            <span class="tag">AI Agent</span>
+            <span class="tag">Evals</span>
+            <span class="tag">Next.js</span>
+          </div>
+          <div class="card-cta">Try It Live →</div>
+        </div>
+      </a>
 
       <!-- YACHT -->
       <a class="game-card" href="https://joenastanskiportfolio.github.io/Joe-Nastanski-Yacht/" target="_blank" rel="noopener">
@@ -500,7 +507,7 @@
         </div>
         <div class="card-body">
           <div class="card-title">Coming Soon</div>
-          <p class="card-desc">The next Nastanski game is in development. Check back soon.</p>
+          <p class="card-desc">The next Nastanski project is in development. Check back soon.</p>
           <div class="card-tags">
             <span class="tag">In Dev</span>
           </div>

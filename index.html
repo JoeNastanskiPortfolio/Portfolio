@@ -1,572 +1,803 @@
-html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joe Nastanski — Product Leader & AI Builder</title>
+<title>Joe Nastanski — Staff Product Manager, RevOps & Salesforce Systems</title>
+<meta name="description" content="18+ years building the platforms that run enterprise sales organizations — Salesforce, CPQ, RevOps. Now building AI products.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy:       #0a0e1a;
-    --navy-mid:   #111827;
-    --navy-card:  #151d2e;
-    --navy-bio:   #0f1628;
-    --blue-royal: #1a4fd6;
-    --blue-bright:#4d9fff;
-    --blue-glow:  #6db8ff;
-    --star:       #c8e0ff;
-    --white:      #f0f4ff;
-    --gold:       #f0c040;
-    --text-body:  #9ab0cc;
+    --bg:          #0a0f1c;
+    --panel:       #111a2c;
+    --panel-line:  #1f2c47;
+    --ink:         #eef3fb;
+    --body:        #93a5c4;
+    --body-dim:    #6d80a3;
+    --blue:        #3d7dfb;
+    --blue-soft:   rgba(61,125,251,0.12);
+    --gold:        #d7a552;
+    --gold-soft:   rgba(215,165,82,0.14);
+    --radius:      14px;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--navy);
-    color: var(--white);
+    background: var(--bg);
+    color: var(--ink);
     font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  #starfield {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .page { position: relative; z-index: 1; }
-
-  .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 24px 48px;
-    text-align: center;
-  }
-
-  .hero-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.8rem, 7vw, 3.6rem);
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    background: linear-gradient(135deg, #ffffff 0%, var(--blue-bright) 60%, var(--blue-royal) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.1;
-    margin-bottom: 10px;
-  }
-
-  .hero-sub {
-    font-size: clamp(0.65rem, 2.2vw, 0.9rem);
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    color: var(--blue-glow);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .hero-tagline {
-    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
-    color: var(--text-body);
-    max-width: 420px;
-    line-height: 1.6;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .divider {
-    width: 100%;
-    max-width: 860px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 0 24px;
-  }
-  .divider-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--blue-royal), transparent);
-  }
-  .divider-star {
-    font-size: 16px;
-    color: var(--blue-bright);
-    animation: spin 8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .bio-section {
-    padding: 56px 24px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.1rem, 3.5vw, 1.6rem);
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--white);
-  }
-
-  .bio-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .bio-card {
-    background: var(--navy-card);
-    border: 1px solid rgba(77,159,255,0.14);
-    border-radius: 14px;
-    padding: 24px 26px;
-  }
-
-  .bio-card.wide {
-    grid-column: 1 / -1;
-  }
-
-  .bio-card-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    margin-bottom: 10px;
-  }
-
-  .bio-card p {
-    font-size: 0.95rem;
-    color: var(--text-body);
-    line-height: 1.7;
-  }
-
-  .bio-card p strong {
-    color: var(--white);
-    font-weight: 600;
-  }
-
-  .credential-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .credential-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: var(--text-body);
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .cred-icon {
-    font-size: 1rem;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
 
-  .skill-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-  .chip {
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    padding: 4px 11px;
-    border-radius: 20px;
-    background: rgba(77,159,255,0.1);
-    border: 1px solid rgba(77,159,255,0.22);
-    color: var(--blue-glow);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
   }
 
-  .games-section {
-    padding: 16px 24px 80px;
-    max-width: 860px;
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.01em; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10,15,28,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    max-width: 1120px;
     margin: 0 auto;
   }
-
-  .game-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-  }
-
-  .game-card {
-    background: var(--navy-card);
-    border: 1px solid rgba(77,159,255,0.18);
-    border-radius: 16px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    position: relative;
-  }
-  .game-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(77,159,255,0.6);
-    box-shadow: 0 16px 48px rgba(26,79,214,0.35), 0 0 0 1px rgba(77,159,255,0.2);
-  }
-
-  .card-preview {
-    height: 170px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 64px;
-    background: linear-gradient(135deg, #0d1f3c 0%, #162848 50%, #0d2240 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .felt-preview {
-    background: linear-gradient(135deg, #0d3320 0%, #145228 50%, #0d3320 100%);
-  }
-  .felt-preview::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px,
-      transparent 1px, transparent 8px
-    );
-  }
-
-  .dice-preview {
-    display: flex;
-    gap: 8px;
-    z-index: 1;
-    position: relative;
-  }
-  .mini-die {
-    width: 42px;
-    height: 42px;
-    background: linear-gradient(135deg, #f8f8f0 0%, #d8d8cc 100%);
-    border-radius: 9px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    padding: 5px;
-    gap: 3px;
-    box-shadow: 2px 3px 8px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.8);
-  }
-  .pip {
-    width: 100%;
-    aspect-ratio: 1;
-    background: #1a1a1a;
-    border-radius: 50%;
-    align-self: center;
-    justify-self: center;
-  }
-  .pip.hidden { visibility: hidden; }
-
-  .card-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: var(--gold);
-    color: #1a1000;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.58rem;
+  .nav-wordmark {
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 3px 8px;
-    border-radius: 20px;
-    z-index: 2;
-  }
-
-  .card-body {
-    padding: 20px 22px 22px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .card-title {
-    font-family: 'Orbitron', sans-serif;
     font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: var(--white);
+    letter-spacing: 0.01em;
   }
-
-  .card-desc {
-    font-size: 0.875rem;
-    color: var(--text-body);
-    line-height: 1.55;
-    flex: 1;
-  }
-
-  .card-tags {
+  .nav-wordmark span { color: var(--blue); }
+  .nav-links {
     display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-  .tag {
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    padding: 3px 9px;
-    border-radius: 20px;
-    background: rgba(77,159,255,0.1);
-    border: 1px solid rgba(77,159,255,0.25);
-    color: var(--blue-glow);
-    text-transform: uppercase;
-  }
-
-  .card-cta {
-    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 14px;
-    padding: 10px 18px;
-    background: linear-gradient(135deg, var(--blue-royal), #1060e8);
+    gap: 28px;
+    font-size: 0.9rem;
+    color: var(--body);
+    list-style: none;
+  }
+  .nav-links a { text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    padding: 9px 16px;
+    background: var(--blue);
+    color: #fff !important;
     border-radius: 8px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #fff;
-    letter-spacing: 0.04em;
-    align-self: flex-start;
-    transition: filter 0.2s;
+    text-decoration: none;
+    white-space: nowrap;
   }
-  .game-card:hover .card-cta { filter: brightness(1.2); }
+  .nav-mobile-hide { display: flex; }
+  @media (max-width: 760px) {
+    .nav-mobile-hide { display: none; }
+  }
 
-  .thumb-preview { padding: 0; overflow: hidden; }
-  .thumb-img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 76px 0 64px;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .signal-line {
+    position: absolute;
+    top: 42%;
+    left: -10%;
+    width: 120%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(61,125,251,0.5) 35%, rgba(215,165,82,0.55) 65%, transparent);
+    opacity: 0.55;
+  }
+  .signal-line::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 14px 3px rgba(215,165,82,0.7);
+    animation: travel 7s linear infinite;
+  }
+  @keyframes travel {
+    0%   { left: 0%; opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .signal-line::after { animation: none; opacity: 0.9; left: 50%; }
+  }
 
-  .coming-soon {
-    opacity: 0.45;
-    pointer-events: none;
+  .hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
   }
-  .coming-soon .card-cta {
-    background: rgba(255,255,255,0.08);
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   }
+
+  .hero-title {
+    font-size: clamp(2.1rem, 4.6vw, 3.1rem);
+    font-weight: 700;
+    line-height: 1.12;
+    margin: 14px 0 18px;
+  }
+  .hero-title .accent { color: var(--blue); }
+  .hero-title .accent2 { color: var(--gold); }
+
+  .hero-desc {
+    color: var(--body);
+    font-size: 1.02rem;
+    max-width: 46ch;
+    margin-bottom: 30px;
+  }
+
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 9px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: filter 0.15s, border-color 0.15s;
+  }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { filter: brightness(1.12); }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--panel-line);
+    color: var(--ink);
+  }
+  .btn-ghost:hover { border-color: var(--blue); }
+
+  /* photo card */
+  .hero-photo-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 20px;
+    padding: 22px;
+  }
+  .hero-photo-frame {
+    aspect-ratio: 4 / 4.6;
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #182543 0%, #0d1526 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  /* === PHOTO PLACEHOLDER ===
+     Replace this whole .hero-photo-placeholder block with:
+     <img src="joe-headshot.jpg" alt="Joe Nastanski" class="hero-photo-img">
+     and add: .hero-photo-img { width:100%; height:100%; object-fit:cover; }
+  */
+  .hero-photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-photo-monogram {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(147,165,196,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--body-dim);
+  }
+  .hero-photo-placeholder small {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--body-dim);
+    letter-spacing: 0.05em;
+  }
+  .hero-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+  .hero-photo-quote {
+    margin-top: 16px;
+    font-size: 0.88rem;
+    color: var(--body);
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .hero-photo-sig {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust {
+    padding: 34px 0;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .trust-label {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .trust-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    color: var(--body-dim);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.02rem;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---------- STATS ---------- */
+  .stats {
+    padding: 44px 0;
+    border-bottom: 1px solid var(--panel-line);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: var(--panel-line);
+    border: 1px solid var(--panel-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  @media (max-width: 860px) {
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .stat-cell {
+    background: var(--panel);
+    padding: 22px 14px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .stat-num.gold { color: var(--gold); }
+  .stat-label {
+    margin-top: 6px;
+    font-size: 0.74rem;
+    color: var(--body-dim);
+    line-height: 1.35;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block { padding: 80px 0; }
+  .block-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .block-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; margin-top: 10px; }
+  .block-sub { color: var(--body); margin-top: 12px; font-size: 0.98rem; }
+
+  /* ---------- PILLARS ---------- */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 860px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+  }
+  .pillar-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+  }
+  .pillar-icon.blue { background: var(--blue-soft); }
+  .pillar-icon.gold { background: var(--gold-soft); }
+  .pillar h3 { font-size: 1.08rem; margin-bottom: 6px; }
+  .pillar p.pillar-desc { color: var(--body); font-size: 0.9rem; margin-bottom: 14px; }
+  .pillar ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .pillar li {
+    font-size: 0.86rem;
+    color: var(--body);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .pillar li::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 760px) { .projects { grid-template-columns: 1fr; } }
+  .proj-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .proj-card:hover { border-color: rgba(61,125,251,0.5); transform: translateY(-3px); }
+  .proj-media {
+    height: 190px;
+    background: linear-gradient(150deg, #16223c, #0e1729);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .proj-badge {
+    position: absolute; top: 14px; right: 14px;
+    background: var(--gold); color: #1a1200;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em;
+    padding: 4px 9px; border-radius: 20px;
+  }
+  .mini-eval {
+    background: var(--bg);
+    border: 1px solid var(--panel-line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    width: 100%;
+    max-width: 260px;
+  }
+  .mini-eval-row { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--body-dim); margin-bottom: 8px; }
+  .mini-eval-big { font-family: 'IBM Plex Mono', monospace; color: var(--gold); font-size: 1.6rem; font-weight: 600; }
+  .mini-eval-cap { font-size: 0.66rem; color: var(--body-dim); margin-top: 2px; }
+  .dice-row { display: flex; gap: 8px; }
+  .mini-die {
+    width: 40px; height: 40px; background: #eef1e8; border-radius: 8px;
+    display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr);
+    padding: 5px; gap: 3px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  }
+  .pip { background: #1a1a1a; border-radius: 50%; align-self: center; justify-self: center; width: 100%; aspect-ratio: 1; }
+  .pip.off { visibility: hidden; }
+
+  .proj-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .proj-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.05rem; }
+  .proj-desc { color: var(--body); font-size: 0.87rem; line-height: 1.55; flex: 1; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.04em;
+    padding: 3px 9px; border-radius: 20px;
+    background: var(--blue-soft);
+    border: 1px solid rgba(61,125,251,0.28);
+    color: #a9c3ff;
+  }
+  .proj-cta {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--blue);
+  }
+  .proj-card:hover .proj-cta { color: #7aa4ff; }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline { position: relative; padding-left: 4px; }
+  .timeline-track {
+    position: relative;
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    padding-bottom: 14px;
+    scrollbar-width: thin;
+  }
+  .timeline-track::-webkit-scrollbar { height: 6px; }
+  .timeline-track::-webkit-scrollbar-thumb { background: var(--panel-line); border-radius: 4px; }
+
+  .tl-item {
+    flex: 0 0 190px;
+    position: relative;
+    padding: 34px 18px 0 0;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 0; right: -18px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(61,125,251,0.55), rgba(61,125,251,0.15));
+  }
+  .tl-item:last-child::before { background: linear-gradient(90deg, var(--gold), transparent); }
+  .tl-dot {
+    position: absolute; top: 5px; left: 0;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid var(--bg);
+  }
+  .tl-item.now .tl-dot {
+    background: var(--gold);
+    box-shadow: 0 0 0 4px rgba(215,165,82,0.18);
+  }
+  .tl-year { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--blue); }
+  .tl-item.now .tl-year { color: var(--gold); }
+  .tl-role { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.94rem; margin-top: 5px; }
+  .tl-org { font-size: 0.8rem; color: var(--body); margin-top: 2px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: var(--radius);
+    padding: 30px;
+  }
+  .contact-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+  .contact-card p { color: var(--body); font-size: 0.92rem; margin-bottom: 18px; }
+  .contact-links { display: flex; flex-direction: column; gap: 10px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    color: var(--ink);
+    padding: 10px 14px;
+    border: 1px solid var(--panel-line);
+    border-radius: 9px;
+    transition: border-color 0.15s;
+  }
+  .contact-link:hover { border-color: var(--blue); }
 
   footer {
-    border-top: 1px solid rgba(77,159,255,0.1);
-    padding: 32px 24px;
+    border-top: 1px solid var(--panel-line);
+    padding: 28px 0;
     text-align: center;
-    font-size: 0.78rem;
-    color: rgba(154,176,204,0.45);
-    letter-spacing: 0.06em;
-  }
-  footer span { color: var(--blue-bright); opacity: 0.7; }
-
-  @media (max-width: 600px) {
-    .bio-grid { grid-template-columns: 1fr; }
-    .bio-card.wide { grid-column: 1; }
-    .hero { padding: 44px 20px 36px; }
-    .card-preview { height: 148px; }
-    .mini-die { width: 36px; height: 36px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .logo-wrap, .divider-star { animation: none; }
-    .game-card { transition: none; }
+    font-size: 0.8rem;
+    color: var(--body-dim);
   }
 </style>
 </head>
 <body>
 
-<canvas id="starfield"></canvas>
-
-<div class="page">
-
-  <!-- HERO -->
-  <header class="hero">
-    <h1 class="hero-name">Joe Nastanski</h1>
-    <p class="hero-tagline">Imagination &nbsp;|&nbsp; Innovation &nbsp;|&nbsp; Impact</p>
-  </header>
-
-  <div class="divider">
-    <div class="divider-line"></div>
-    <div class="divider-star">✦</div>
-    <div class="divider-line"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-wordmark">JOE <span>NASTANSKI</span></a>
+    <ul class="nav-links nav-mobile-hide">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="Nastanski_Joseph_Resume_2026.pdf" download>Resume ↓</a>
   </div>
+</nav>
 
-  <!-- BIO -->
-  <section class="bio-section">
-    <p class="section-label">About</p>
-    <h2 class="section-title">Staff Product Manager. RevOps & Salesforce Systems. AI Builder.</h2>
+<div id="top"></div>
 
-    <div class="bio-grid">
-
-      <div class="bio-card wide">
-        <div class="bio-card-label">What I Do</div>
-        <p>I build the systems that run enterprise sales organizations. With <strong>18+ years</strong> leading product and platform work across Salesforce Sales Cloud, CPQ, commissions, forecasting, and territory management — I take on the hard, cross-functional problems and ship them. Now I'm applying that same hands-on drive to AI, building real products with it, not just studying it.</p>
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="signal-line" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Staff Product Manager &nbsp;·&nbsp; RevOps &amp; Salesforce Systems</p>
+      <h1 class="hero-title">Building the systems that run <span class="accent">enterprise revenue</span> — now applying that to <span class="accent2">AI</span>.</h1>
+      <p class="hero-desc">18+ years architecting the platforms that power sales organizations — Salesforce, CPQ, commissions, forecasting, territory management. Today I'm building real AI products, not just studying them.</p>
+      <div class="btn-row">
+        <a href="#projects" class="btn btn-primary">See what I've built →</a>
+        <a href="#contact" class="btn btn-ghost">Let's talk</a>
       </div>
+    </div>
 
-      <div class="bio-card">
-        <div class="bio-card-label">Credentials</div>
-        <ul class="credential-list">
-          <li><span class="cred-icon">🎓</span> MBA — Babson College</li>
-          <li><span class="cred-icon">🤖</span> Master of Professional Studies in Applied AI (In Process) — Northeastern University</li>
-          <li><span class="cred-icon">🏢</span> 18+ years in Enterprise Product &amp; Platform Leadership</li>
+    <div class="hero-photo-card">
+      <div class="hero-photo-frame">
+        <img src="joe-headshot.jpg" alt="Joe Nastanski" class="hero-photo-img">
+      </div>
+      <p class="hero-photo-quote">"I build enterprise products at the intersection of revenue operations, Salesforce, and AI — where the work actually has to hold up under real business consequences."</p>
+      <p class="hero-photo-sig">— Joe Nastanski</p>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TRUST STRIP ================= -->
+<section class="trust">
+  <div class="wrap">
+    <p class="eyebrow trust-label" style="text-align:center;">Experience across</p>
+    <div class="trust-logos">
+      <span>MongoDB</span>
+      <span>UKG</span>
+      <span>Unum</span>
+      <span>Fidelity Investments</span>
+      <span>Dell</span>
+      <span>TJX</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-num">18+</div>
+        <div class="stat-label">Years in enterprise product &amp; platform leadership</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num gold">4,000+</div>
+        <div class="stat-label">Opportunities scored by a production ML model I shipped</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">1,200+</div>
+        <div class="stat-label">Global sales users migrated to Salesforce Lightning</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">5,000+</div>
+        <div class="stat-label">Sales-to-CS handovers per year on a system I built</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num gold">80+</div>
+        <div class="stat-label">Major platform releases delivered</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">MBA</div>
+        <div class="stat-label">Babson College · MPS Applied AI, Northeastern (in progress)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT / PILLARS ================= -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="block-head">
+      <p class="eyebrow">Why teams bring me in</p>
+      <h2 class="block-title">Product leadership, revenue systems, and AI — grounded in each other</h2>
+      <p class="block-sub">Every AI product I build starts from having actually run the revenue systems it's meant to help.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon blue">🧭</div>
+        <h3>Product Leadership</h3>
+        <p class="pillar-desc">Defining strategy, discovering the real problem, and shipping through ambiguity.</p>
+        <ul>
+          <li>Roadmap definition &amp; product discovery</li>
+          <li>Voice of Customer</li>
+          <li>Cross-functional program leadership</li>
+          <li>Agile/Scrum delivery</li>
+          <li>Stakeholder governance</li>
         </ul>
       </div>
 
-      <div class="bio-card">
-        <div class="bio-card-label">Expertise</div>
-        <div class="skill-chips">
-          <span class="chip">Salesforce</span>
-          <span class="chip">Sales Cloud</span>
-          <span class="chip">CPQ</span>
-          <span class="chip">Commissions</span>
-          <span class="chip">Forecasting</span>
-          <span class="chip">Territory Mgmt</span>
-          <span class="chip">Vibe Coding</span>
-          <span class="chip">AI Applications</span>
-          <span class="chip">Cross-functional</span>
-        </div>
+      <div class="pillar">
+        <div class="pillar-icon gold">📊</div>
+        <h3>Revenue Operations &amp; Salesforce</h3>
+        <p class="pillar-desc">The GTM systems that run the business — owned end to end.</p>
+        <ul>
+          <li>Salesforce Sales Cloud</li>
+          <li>CPQ / Salesforce Industries CPQ</li>
+          <li>Quote-to-Cash (Q2C)</li>
+          <li>Territory management</li>
+          <li>Commission calculation &amp; forecasting</li>
+        </ul>
       </div>
 
+      <div class="pillar">
+        <div class="pillar-icon blue">🤖</div>
+        <h3>AI &amp; Building</h3>
+        <p class="pillar-desc">Hands-on, not theoretical — built with Claude, shipped, and evaluated.</p>
+        <ul>
+          <li>AI agent design &amp; prompt engineering</li>
+          <li>LLM-based classification &amp; structured output</li>
+          <li>Evaluation-driven development (self-grading eval sets)</li>
+          <li>AI-assisted ("vibe-coded") development</li>
+          <li>Applied AI coursework, Northeastern (in progress)</li>
+        </ul>
+      </div>
     </div>
-  </section>
-
-  <div class="divider">
-    <div class="divider-line"></div>
-    <div class="divider-star">✦</div>
-    <div class="divider-line"></div>
   </div>
+</section>
 
-  <!-- PROJECTS -->
-  <main class="games-section">
-    <p class="section-label">Vibe Coding Showcase</p>
-    <h2 class="section-title">What I'm Building with AI</h2>
+<!-- ================= PROJECTS ================= -->
+<section class="block" id="projects" style="border-top:1px solid var(--panel-line); border-bottom:1px solid var(--panel-line);">
+  <div class="wrap">
+    <div class="block-head">
+      <p class="eyebrow">What I'm building</p>
+      <h2 class="block-title">AI products, shipped and evaluated</h2>
+      <p class="block-sub">Not demos of the happy path — systems that grade their own work.</p>
+    </div>
 
-    <div class="game-grid">
-
-      <!-- DEAL DESK TRIAGE AGENT -->
-      <a class="game-card" href="https://deal-desk-triage-agent.vercel.app/" target="_blank" rel="noopener">
-        <div class="card-preview thumb-preview">
-          <img src="deal-desk-thumb.png" alt="Deal Desk Agent dashboard screenshot" class="thumb-img">
-          <div class="card-badge">LIVE</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Deal Desk Agent</div>
-          <p class="card-desc">A live AI agent that triages sales-exec deal questions — discount approvals, payment terms, contract redlines — and decides auto-resolve vs. escalate. Scores itself against a labeled eval set with per-category analytics.</p>
-          <div class="card-tags">
-            <span class="tag">AI Agent</span>
-            <span class="tag">Evals</span>
-            <span class="tag">Next.js</span>
+    <div class="projects">
+      <a class="proj-card" href="https://deal-desk-triage-agent.vercel.app/" target="_blank" rel="noopener">
+        <div class="proj-media">
+          <span class="proj-badge">LIVE</span>
+          <div class="mini-eval">
+            <div class="mini-eval-row"><span>ACCURACY</span><span>16 / 16</span></div>
+            <div class="mini-eval-big">94%</div>
+            <div class="mini-eval-cap">scored against a labeled eval set</div>
           </div>
-          <div class="card-cta">Try It Live →</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Deal Desk Agent</div>
+          <p class="proj-desc">An AI agent that triages sales-exec deal questions — discount approvals, payment terms, contract redlines — and decides auto-resolve vs. escalate. Every run scores itself against a held-out, labeled eval set, no cherry-picking.</p>
+          <div class="proj-tags">
+            <span class="tag">AI Agent Design</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">Built with Claude</span>
+          </div>
+          <div class="proj-cta">Try it live →</div>
         </div>
       </a>
 
-      <!-- YACHT -->
-      <a class="game-card" href="https://joenastanskiportfolio.github.io/Joe-Nastanski-Yacht/" target="_blank" rel="noopener">
-        <div class="card-preview thumb-preview">
-          <img src="yacht-thumb.png" alt="Yacht game screenshot" class="thumb-img">
-          <div class="card-badge">LIVE</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Yacht</div>
-          <p class="card-desc">The classic 1938 dice game — built entirely through AI-assisted vibe coding. Roll five dice, chase 12 categories, and aim for Yacht. Casino-style green felt table.</p>
-          <div class="card-tags">
-            <span class="tag">Dice</span>
-            <span class="tag">Strategy</span>
-            <span class="tag">Vibe Coded</span>
+      <a class="proj-card" href="https://joenastanskiportfolio.github.io/Joe-Nastanski-Yacht/" target="_blank" rel="noopener">
+        <div class="proj-media">
+          <span class="proj-badge">LIVE</span>
+          <div class="dice-row">
+            <div class="mini-die"><span class="pip"></span><span class="pip off"></span><span class="pip"></span><span class="pip off"></span><span class="pip off"></span><span class="pip off"></span><span class="pip"></span><span class="pip off"></span><span class="pip"></span></div>
+            <div class="mini-die"><span class="pip off"></span><span class="pip off"></span><span class="pip off"></span><span class="pip off"></span><span class="pip"></span><span class="pip off"></span><span class="pip off"></span><span class="pip off"></span><span class="pip off"></span></div>
           </div>
-          <div class="card-cta">Play Now →</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Yacht</div>
+          <p class="proj-desc">The classic 1938 dice game, built end to end through AI-assisted development. Five dice, twelve scoring categories, a casino-style table — a lighter build to sharpen the same workflow.</p>
+          <div class="proj-tags">
+            <span class="tag">Vibe-Coded</span>
+            <span class="tag">Game Logic</span>
+          </div>
+          <div class="proj-cta">Play now →</div>
         </div>
       </a>
+    </div>
+  </div>
+</section>
 
-      <!-- COMING SOON -->
-      <div class="game-card coming-soon">
-        <div class="card-preview">
-          <span>🎮</span>
+<!-- ================= EXPERIENCE / TIMELINE ================= -->
+<section class="block" id="experience">
+  <div class="wrap">
+    <div class="block-head">
+      <p class="eyebrow">Career</p>
+      <h2 class="block-title">18+ years, one throughline</h2>
+      <p class="block-sub">From owning a 900-user CRM platform to shipping production ML into a global forecast process.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-track">
+        <div class="tl-item">
+          <span class="tl-dot"></span>
+          <div class="tl-year">Early career</div>
+          <div class="tl-role">Systems &amp; Business Analysis</div>
+          <div class="tl-org">Fidelity · Dell · TJX</div>
         </div>
-        <div class="card-body">
-          <div class="card-title">Coming Soon</div>
-          <p class="card-desc">The next Nastanski project is in development. Check back soon.</p>
-          <div class="card-tags">
-            <span class="tag">In Dev</span>
-          </div>
-          <div class="card-cta">Stay Tuned</div>
+        <div class="tl-item">
+          <span class="tl-dot"></span>
+          <div class="tl-year">2008–2019</div>
+          <div class="tl-role">Platform Owner</div>
+          <div class="tl-org">UKG — Oracle CRM → Salesforce Sales Cloud</div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot"></span>
+          <div class="tl-year">2019–2021</div>
+          <div class="tl-role">Platform Owner, CPQ</div>
+          <div class="tl-org">Unum — Salesforce Industries CPQ</div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot"></span>
+          <div class="tl-year">2021</div>
+          <div class="tl-role">Process Owner Consultant</div>
+          <div class="tl-org">Atrium Innovations</div>
+        </div>
+        <div class="tl-item">
+          <span class="tl-dot"></span>
+          <div class="tl-year">2021–2026</div>
+          <div class="tl-role">Staff Product Manager</div>
+          <div class="tl-org">MongoDB — GTM &amp; Revenue Systems</div>
+        </div>
+        <div class="tl-item now">
+          <span class="tl-dot"></span>
+          <div class="tl-year">Today</div>
+          <div class="tl-role">Building AI products</div>
+          <div class="tl-org">Applied AI, Northeastern (in progress)</div>
         </div>
       </div>
-
     </div>
-  </main>
+  </div>
+</section>
 
-  <footer>
-    <p>© 2025 <span>Joe Nastanski</span> &nbsp;·&nbsp; Imagination | Innovation | Impact</p>
-  </footer>
+<!-- ================= CONTACT ================= -->
+<section class="block" id="contact" style="border-top:1px solid var(--panel-line);">
+  <div class="wrap">
+    <div class="block-head">
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="block-title">Open to Staff / Principal PM roles in RevOps, GTM systems, and AI product</h2>
+    </div>
 
-</div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Let's talk</h3>
+        <p>Based in Holden, MA. Open to remote or hybrid within range. Happy to talk about a specific role or just compare notes on RevOps and AI.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:joseph.nastanski@gmail.com">✉ &nbsp;joseph.nastanski@gmail.com</a>
+          <a class="contact-link" href="tel:5087352085">☎ &nbsp;508.735.2085</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>Elsewhere</h3>
+        <p>Resume, code, and the rest of the network.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="https://www.linkedin.com/in/josephnastanski" target="_blank" rel="noopener">in &nbsp;linkedin.com/in/josephnastanski</a>
+          <a class="contact-link" href="Nastanski_Joseph_Resume_2026.pdf" download>↓ &nbsp;Download resume (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<script>
-(function() {
-  const canvas = document.getElementById('starfield');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-
-  function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  function makeStars(n) {
-    stars = [];
-    for (let i = 0; i < n; i++) {
-      stars.push({
-        x:     Math.random() * canvas.width,
-        y:     Math.random() * canvas.height,
-        r:     Math.random() * 1.2 + 0.2,
-        op:    Math.random() * 0.45 + 0.05,
-        speed: Math.random() * 0.007 + 0.002,
-        phase: Math.random() * Math.PI * 2
-      });
-    }
-  }
-
-  function draw(t) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stars.forEach(s => {
-      const b = s.op * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,224,255,${b})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', () => { resize(); makeStars(120); });
-  resize();
-  makeStars(120);
-  requestAnimationFrame(draw);
-})();
-</script>
+<footer>
+  <div class="wrap">© 2026 Joe Nastanski</div>
+</footer>
 
 </body>
 </html>

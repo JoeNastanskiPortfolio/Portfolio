@@ -209,36 +209,6 @@
     justify-content: center;
     position: relative;
   }
-  /* === PHOTO PLACEHOLDER ===
-     Replace this whole .hero-photo-placeholder block with:
-     <img src="joe-headshot.jpg" alt="Joe Nastanski" class="hero-photo-img">
-     and add: .hero-photo-img { width:100%; height:100%; object-fit:cover; }
-  */
-  .hero-photo-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  .hero-photo-monogram {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    border: 1.5px dashed rgba(147,165,196,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--body-dim);
-  }
-  .hero-photo-placeholder small {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--body-dim);
-    letter-spacing: 0.05em;
-  }
   .hero-photo-img {
     width: 100%;
     height: 100%;
@@ -411,27 +381,6 @@
     font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em;
     padding: 4px 9px; border-radius: 20px;
   }
-  .mini-eval {
-    background: var(--bg);
-    border: 1px solid var(--panel-line);
-    border-radius: 10px;
-    padding: 14px 18px;
-    width: 100%;
-    max-width: 260px;
-  }
-  .mini-eval-row { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--body-dim); margin-bottom: 8px; }
-  .mini-eval-big { font-family: 'IBM Plex Mono', monospace; color: var(--gold); font-size: 1.6rem; font-weight: 600; }
-  .mini-eval-cap { font-size: 0.66rem; color: var(--body-dim); margin-top: 2px; }
-  .dice-row { display: flex; gap: 8px; }
-  .mini-die {
-    width: 40px; height: 40px; background: #eef1e8; border-radius: 8px;
-    display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr);
-    padding: 5px; gap: 3px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.4);
-  }
-  .pip { background: #1a1a1a; border-radius: 50%; align-self: center; justify-self: center; width: 100%; aspect-ratio: 1; }
-  .pip.off { visibility: hidden; }
-
   .proj-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
   .proj-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.05rem; }
   .proj-desc { color: var(--body); font-size: 0.87rem; line-height: 1.55; flex: 1; }
@@ -536,9 +485,9 @@
   <div class="nav-inner">
     <a href="#top" class="nav-wordmark">JOE <span>NASTANSKI</span></a>
     <ul class="nav-links nav-mobile-hide">
+      <li><a href="#projects">AI Projects</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a class="nav-cta" href="mailto:joseph.nastanski@gmail.com">Contact Me →</a>
@@ -595,20 +544,20 @@
         <div class="stat-label">Years in enterprise product &amp; platform leadership</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-num gold">4,000+</div>
+        <div class="stat-num gold">94%</div>
+        <div class="stat-label">Self-graded eval accuracy on my live AI deal-desk agent</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">4,000+</div>
         <div class="stat-label">Opportunities scored by a production ML model I shipped</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">1,200+</div>
-        <div class="stat-label">Global sales users migrated to Salesforce Lightning</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">5,000+</div>
-        <div class="stat-label">Sales-to-CS handovers per year on a system I built</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num gold">80+</div>
         <div class="stat-label">Major platform releases delivered</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">5,000+</div>
+        <div class="stat-label">Sales-to-CS handovers per year on a system I built</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num">MBA</div>
@@ -618,60 +567,8 @@
   </div>
 </section>
 
-<!-- ================= ABOUT / PILLARS ================= -->
-<section class="block" id="about">
-  <div class="wrap">
-    <div class="block-head">
-      <p class="eyebrow">Why teams bring me in</p>
-      <h2 class="block-title">Product leadership, revenue systems, and AI — grounded in each other</h2>
-      <p class="block-sub">Every AI product I build starts from having actually run the revenue systems it's meant to help.</p>
-    </div>
-
-    <div class="pillars">
-      <div class="pillar">
-        <div class="pillar-icon blue">🧭</div>
-        <h3>Product Leadership</h3>
-        <p class="pillar-desc">Defining strategy, discovering the real problem, and shipping through ambiguity.</p>
-        <ul>
-          <li>Roadmap definition &amp; product discovery</li>
-          <li>Voice of Customer</li>
-          <li>Cross-functional program leadership</li>
-          <li>Agile/Scrum delivery</li>
-          <li>Stakeholder governance</li>
-        </ul>
-      </div>
-
-      <div class="pillar">
-        <div class="pillar-icon gold">📊</div>
-        <h3>Revenue Operations &amp; Salesforce</h3>
-        <p class="pillar-desc">The GTM systems that run the business — owned end to end.</p>
-        <ul>
-          <li>Salesforce Sales Cloud</li>
-          <li>CPQ / Salesforce Industries CPQ</li>
-          <li>Quote-to-Cash (Q2C)</li>
-          <li>Territory management</li>
-          <li>Commission calculation &amp; forecasting</li>
-        </ul>
-      </div>
-
-      <div class="pillar">
-        <div class="pillar-icon blue">🤖</div>
-        <h3>AI &amp; Building</h3>
-        <p class="pillar-desc">Hands-on, not theoretical — built with Claude, shipped, and evaluated.</p>
-        <ul>
-          <li>AI agent design &amp; prompt engineering</li>
-          <li>LLM-based classification &amp; structured output</li>
-          <li>Evaluation-driven development (self-grading eval sets)</li>
-          <li>AI-assisted ("vibe-coded") development</li>
-          <li>Applied AI coursework, Northeastern (in progress)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PROJECTS ================= -->
-<section class="block" id="projects" style="border-top:1px solid var(--panel-line); border-bottom:1px solid var(--panel-line);">
+<!-- ================= PROJECTS (moved up — was after About/Pillars) ================= -->
+<section class="block" id="projects" style="border-bottom:1px solid var(--panel-line);">
   <div class="wrap">
     <div class="block-head">
       <p class="eyebrow">What I'm building</p>
@@ -716,8 +613,60 @@
   </div>
 </section>
 
+<!-- ================= ABOUT / PILLARS (AI pillar now leads) ================= -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="block-head">
+      <p class="eyebrow">Why teams bring me in</p>
+      <h2 class="block-title">Product leadership, revenue systems, and AI — grounded in each other</h2>
+      <p class="block-sub">Every AI product I build starts from having actually run the revenue systems it's meant to help.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon blue">🤖</div>
+        <h3>AI &amp; Building</h3>
+        <p class="pillar-desc">Hands-on, not theoretical — built with Claude, shipped, and evaluated.</p>
+        <ul>
+          <li>AI agent design &amp; prompt engineering</li>
+          <li>LLM-based classification &amp; structured output</li>
+          <li>Evaluation-driven development (self-grading eval sets)</li>
+          <li>AI-assisted ("vibe-coded") development</li>
+          <li>Applied AI coursework, Northeastern (in progress)</li>
+        </ul>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-icon gold">📊</div>
+        <h3>Revenue Operations &amp; Salesforce</h3>
+        <p class="pillar-desc">The GTM systems that run the business — owned end to end.</p>
+        <ul>
+          <li>Salesforce Sales Cloud</li>
+          <li>CPQ / Salesforce Industries CPQ</li>
+          <li>Quote-to-Cash (Q2C)</li>
+          <li>Territory management</li>
+          <li>Commission calculation &amp; forecasting</li>
+        </ul>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-icon blue">🧭</div>
+        <h3>Product Leadership</h3>
+        <p class="pillar-desc">Defining strategy, discovering the real problem, and shipping through ambiguity.</p>
+        <ul>
+          <li>Roadmap definition &amp; product discovery</li>
+          <li>Voice of Customer</li>
+          <li>Cross-functional program leadership</li>
+          <li>Agile/Scrum delivery</li>
+          <li>Stakeholder governance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= EXPERIENCE / TIMELINE ================= -->
-<section class="block" id="experience">
+<section class="block" id="experience" style="border-top:1px solid var(--panel-line);">
   <div class="wrap">
     <div class="block-head">
       <p class="eyebrow">Career</p>

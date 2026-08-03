@@ -109,7 +109,7 @@
   .hero {
     position: relative;
     overflow: hidden;
-    padding: 76px 0 64px;
+    padding: 52px 0 40px;
     border-bottom: 1px solid var(--panel-line);
   }
   .signal-line {
@@ -147,7 +147,7 @@
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1.4fr 0.6fr;
     gap: 56px;
     align-items: center;
   }
@@ -197,7 +197,9 @@
     background: var(--panel);
     border: 1px solid var(--panel-line);
     border-radius: 20px;
-    padding: 22px;
+    padding: 16px;
+    max-width: 300px;
+    margin-left: auto;
   }
   .hero-photo-frame {
     aspect-ratio: 4 / 4.6;
@@ -521,9 +523,9 @@
 </header>
 
 <!-- ================= TRUST STRIP ================= -->
-<section class="trust">
+<section class="trust" style="padding: 22px 0;">
   <div class="wrap">
-    <p class="eyebrow trust-label" style="text-align:center;">Experience across</p>
+    <p class="eyebrow trust-label" style="text-align:center; margin-bottom: 12px;">Experience across</p>
     <div class="trust-logos">
       <span>MongoDB</span>
       <span>UKG</span>
@@ -531,6 +533,52 @@
       <span>Fidelity Investments</span>
       <span>Dell</span>
       <span>TJX</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS (on-screen immediately after trust strip) ================= -->
+<section class="block" id="projects" style="padding: 32px 0; border-bottom:1px solid var(--panel-line);">
+  <div class="wrap">
+    <div class="block-head" style="margin-bottom: 22px;">
+      <p class="eyebrow">What I'm building</p>
+      <h2 class="block-title">AI products, shipped and evaluated</h2>
+      <p class="block-sub">Not demos of the happy path — systems that grade their own work.</p>
+    </div>
+
+    <div class="projects">
+      <a class="proj-card" href="https://deal-desk-triage-agent.vercel.app/" target="_blank" rel="noopener">
+        <div class="proj-media" style="height: 130px;">
+          <img src="deal-desk-thumb.jpg" alt="Deal Desk Agent dashboard showing 94% accuracy" class="proj-thumb">
+          <span class="proj-badge">LIVE</span>
+        </div>
+        <div class="proj-body" style="padding: 14px 16px 16px;">
+          <div class="proj-title">Deal Desk Agent</div>
+          <p class="proj-desc">An AI agent that triages sales-exec deal questions — discount approvals, payment terms, contract redlines — and decides auto-resolve vs. escalate. Every run scores itself against a held-out, labeled eval set, no cherry-picking.</p>
+          <div class="proj-tags">
+            <span class="tag">AI Agent Design</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">Built with Claude</span>
+          </div>
+          <div class="proj-cta">Try it live →</div>
+        </div>
+      </a>
+
+      <a class="proj-card" href="https://joenastanskiportfolio.github.io/Joe-Nastanski-Yacht/" target="_blank" rel="noopener">
+        <div class="proj-media" style="height: 130px;">
+          <img src="yacht-thumb.jpg" alt="Yacht Solitaire dice game interface" class="proj-thumb">
+          <span class="proj-badge">LIVE</span>
+        </div>
+        <div class="proj-body" style="padding: 14px 16px 16px;">
+          <div class="proj-title">Yacht</div>
+          <p class="proj-desc">The classic 1938 dice game, built end to end through AI-assisted development. Five dice, twelve scoring categories, a casino-style table — a lighter build to sharpen the same workflow.</p>
+          <div class="proj-tags">
+            <span class="tag">Vibe-Coded</span>
+            <span class="tag">Game Logic</span>
+          </div>
+          <div class="proj-cta">Play now →</div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -563,52 +611,6 @@
         <div class="stat-num">MBA</div>
         <div class="stat-label">Babson College · MPS Applied AI, Northeastern (in progress)</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PROJECTS (moved up — was after About/Pillars) ================= -->
-<section class="block" id="projects" style="border-bottom:1px solid var(--panel-line);">
-  <div class="wrap">
-    <div class="block-head">
-      <p class="eyebrow">What I'm building</p>
-      <h2 class="block-title">AI products, shipped and evaluated</h2>
-      <p class="block-sub">Not demos of the happy path — systems that grade their own work.</p>
-    </div>
-
-    <div class="projects">
-      <a class="proj-card" href="https://deal-desk-triage-agent.vercel.app/" target="_blank" rel="noopener">
-        <div class="proj-media">
-          <img src="deal-desk-thumb.jpg" alt="Deal Desk Agent dashboard showing 94% accuracy" class="proj-thumb">
-          <span class="proj-badge">LIVE</span>
-        </div>
-        <div class="proj-body">
-          <div class="proj-title">Deal Desk Agent</div>
-          <p class="proj-desc">An AI agent that triages sales-exec deal questions — discount approvals, payment terms, contract redlines — and decides auto-resolve vs. escalate. Every run scores itself against a held-out, labeled eval set, no cherry-picking.</p>
-          <div class="proj-tags">
-            <span class="tag">AI Agent Design</span>
-            <span class="tag">Prompt Engineering</span>
-            <span class="tag">Built with Claude</span>
-          </div>
-          <div class="proj-cta">Try it live →</div>
-        </div>
-      </a>
-
-      <a class="proj-card" href="https://joenastanskiportfolio.github.io/Joe-Nastanski-Yacht/" target="_blank" rel="noopener">
-        <div class="proj-media">
-          <img src="yacht-thumb.jpg" alt="Yacht Solitaire dice game interface" class="proj-thumb">
-          <span class="proj-badge">LIVE</span>
-        </div>
-        <div class="proj-body">
-          <div class="proj-title">Yacht</div>
-          <p class="proj-desc">The classic 1938 dice game, built end to end through AI-assisted development. Five dice, twelve scoring categories, a casino-style table — a lighter build to sharpen the same workflow.</p>
-          <div class="proj-tags">
-            <span class="tag">Vibe-Coded</span>
-            <span class="tag">Game Logic</span>
-          </div>
-          <div class="proj-cta">Play now →</div>
-        </div>
-      </a>
     </div>
   </div>
 </section>

@@ -343,10 +343,10 @@
   /* ---------- PROJECTS ---------- */
   .projects {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 22px;
   }
-  @media (max-width: 760px) { .projects { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .projects { grid-template-columns: 1fr; } }
   .proj-card {
     background: var(--panel);
     border: 1px solid var(--panel-line);
@@ -577,6 +577,23 @@
             <span class="tag">Game Logic</span>
           </div>
           <div class="proj-cta">Play now →</div>
+        </div>
+      </a>
+
+      <a class="proj-card" href="notebooklm-case-study.pdf" target="_blank" rel="noopener">
+        <div class="proj-media" style="height: 130px;">
+          <img src="notebooklm-thumb.jpg" alt="Title slide of the NotebookLM case study for All For Less, a hypothetical off-price retailer" class="proj-thumb">
+          <span class="proj-badge" style="top: auto; bottom: 12px;">CASE STUDY</span>
+        </div>
+        <div class="proj-body" style="padding: 14px 16px 16px;">
+          <div class="proj-title">NotebookLM Rollout Strategy</div>
+          <p class="proj-desc">Evaluated four document-AI tools for a hypothetical 350-store off-price retailer and recommended NotebookLM Enterprise on data privacy, Google Workspace fit, and cost — with a three-phase pilot plan and a stakeholder feedback loop.</p>
+          <div class="proj-tags">
+            <span class="tag">AI Tool Evaluation</span>
+            <span class="tag">Data Privacy</span>
+            <span class="tag">Rollout Planning</span>
+          </div>
+          <div class="proj-cta">Read the case study (PDF) →</div>
         </div>
       </a>
     </div>

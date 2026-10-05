@@ -344,10 +344,10 @@
   /* ---------- PROJECTS ---------- */
   .projects {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 22px;
   }
-  @media (max-width: 900px) { .projects { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .projects { grid-template-columns: 1fr; } }
   .proj-card {
     background: var(--panel);
     border: 1px solid var(--panel-line);
@@ -548,6 +548,23 @@
     </div>
 
     <div class="projects">
+      <a class="proj-card" href="ai-sales-research-agent.pdf" target="_blank" rel="noopener">
+        <div class="proj-media" style="height: 130px;">
+          <img src="sales-agent-thumb.jpg" alt="Title slide: I Built an AI Agent That Researches My Sales Accounts, showing Salesforce, n8n, and Claude feeding a pre-call brief" class="proj-thumb" style="object-position: center;">
+          <span class="proj-badge">BUILD</span>
+        </div>
+        <div class="proj-body" style="padding: 14px 16px 16px;">
+          <div class="proj-title">AI Sales Research Agent</div>
+          <p class="proj-desc">An hourly n8n workflow finds Salesforce accounts without a brief, has Claude research each one on the web, runs a second Claude pass to fact-check every claim, and saves a sourced pre-call brief back to the account. About 64 cents per verified brief.</p>
+          <div class="proj-tags">
+            <span class="tag">Agentic Workflow</span>
+            <span class="tag">Salesforce + n8n</span>
+            <span class="tag">Built with Claude</span>
+          </div>
+          <div class="proj-cta">See the build (PDF) →</div>
+        </div>
+      </a>
+
       <a class="proj-card" href="https://deal-desk-triage-agent.vercel.app/" target="_blank" rel="noopener">
         <div class="proj-media" style="height: 130px;">
           <img src="deal-desk-thumb.jpg" alt="Deal Desk Agent dashboard showing 94% accuracy" class="proj-thumb">
